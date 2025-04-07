@@ -84,7 +84,4 @@ int main() {
         cout << endl;
     }
 
-    // Final del juego
-    cout << "¡Felicitaciones, has ganado!" << endl;
-    return 0;
 }
