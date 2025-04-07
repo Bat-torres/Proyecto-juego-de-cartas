@@ -1,30 +1,19 @@
 #include <iostream>
 #include <vector>
-#include <algorithm>
-#include <random>
 using namespace std;
 
 int main() {
     // Declaración de matrices y vectores
-    vector<vector<string>> matriz(4, vector<string>(4));
-    vector<string> numeros = {"1","1","2","2","3","3","4","4","5","5","6","6","7","7","8","8"};
+    vector<vector<string>> matriz = {
+        {"1","1","2","2"},
+        {"3","3","4","4"},
+        {"5","5","6","6"},
+        {"7","7","8","8"}
+    };
     vector<vector<string>> ciego(4, vector<string>(4, "-"));
-    vector<string> copiar;
-    vector<int> columna(4); // Guarda las coordenadas de los dos números seleccionados
 
     string guardar, guardar1;
     int numero, numero2, contador = 0;
-
-    // Mezcla aleatoria de los números
-    random_device rd;
-    mt19937 g(rd());
-    shuffle(numeros.begin(), numeros.end(), g);
-
-    // Llenado de la matriz con los números mezclados
-    int index = 0;
-    for (int i = 0; i < 4; i++)
-        for (int j = 0; j < 4; j++)
-            matriz[i][j] = numeros[index++];
 
     // Ciclo del juego
     while (contador < 8) {
@@ -43,13 +32,6 @@ int main() {
         // Validación de entrada
         while (numero < 1 || numero > 16 || numero2 < 1 || numero2 > 16 || numero == numero2) {
             cout << "Entrada inválida. Ingrese dos números diferentes entre 1 y 16:\n";
-            cin >> numero >> numero2;
-        }
-
-        // Verificar si ya fueron descubiertos
-        while (find(copiar.begin(), copiar.end(), to_string(numero)) != copiar.end() ||
-               find(copiar.begin(), copiar.end(), to_string(numero2)) != copiar.end()) {
-            cout << "Uno o ambos números ya fueron descubiertos. Ingrese nuevos valores:\n";
             cin >> numero >> numero2;
         }
 
@@ -72,8 +54,6 @@ int main() {
 
         // Evaluar si son iguales
         if (guardar == guardar1) {
-            copiar.push_back(to_string(numero));
-            copiar.push_back(to_string(numero2));
             contador++;
         } else {
             cout << "¡No coinciden!\n";
@@ -83,5 +63,4 @@ int main() {
 
         cout << endl;
     }
-
 }
